@@ -1,9 +1,6 @@
 package com.sirkaue.med.voll.api.controller;
 
-import com.sirkaue.med.voll.api.medico.DadosCadastroMedico;
-import com.sirkaue.med.voll.api.medico.DadosListagemMedico;
-import com.sirkaue.med.voll.api.medico.Medico;
-import com.sirkaue.med.voll.api.medico.MedicoRepository;
+import com.sirkaue.med.voll.api.medico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,5 +24,12 @@ public class MedicoController {
     @GetMapping
     public Page<DadosListagemMedico> listar(Pageable pageable) {
         return repository.findAll(pageable).map(DadosListagemMedico::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+        Medico medico = repository.getReferenceById(dados.id());
+        medico.atualizarInformacoes(dados);
     }
 }
