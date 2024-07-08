@@ -1,7 +1,6 @@
 package com.sirkaue.med.voll.api.controller;
 
 import com.sirkaue.med.voll.api.domain.medico.*;
-import com.sirkaue.med.voll.api.medico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
