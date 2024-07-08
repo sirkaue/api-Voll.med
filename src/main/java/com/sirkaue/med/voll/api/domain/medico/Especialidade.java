@@ -1,4 +1,4 @@
-package com.sirkaue.med.voll.api.medico;
+package com.sirkaue.med.voll.api.domain.medico;
 
 public enum Especialidade {
 

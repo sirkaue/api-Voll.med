@@ -1,6 +1,6 @@
-package com.sirkaue.med.voll.api.pacientes;
+package com.sirkaue.med.voll.api.domain.paciente;
 
-import com.sirkaue.med.voll.api.endereco.DadosEndereco;
+import com.sirkaue.med.voll.api.domain.endereco.DadosEndereco;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoPaciente(

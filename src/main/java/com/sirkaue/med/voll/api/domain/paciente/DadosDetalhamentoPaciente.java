@@ -1,6 +1,6 @@
-package com.sirkaue.med.voll.api.pacientes;
+package com.sirkaue.med.voll.api.domain.paciente;
 
-import com.sirkaue.med.voll.api.endereco.Endereco;
+import com.sirkaue.med.voll.api.domain.endereco.Endereco;
 
 public record DadosDetalhamentoPaciente(
         Long id,

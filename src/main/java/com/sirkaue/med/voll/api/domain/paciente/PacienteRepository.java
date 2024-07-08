@@ -1,4 +1,4 @@
-package com.sirkaue.med.voll.api.pacientes;
+package com.sirkaue.med.voll.api.domain.paciente;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
