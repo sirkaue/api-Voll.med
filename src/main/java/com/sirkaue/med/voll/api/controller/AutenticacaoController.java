@@ -1,6 +1,9 @@
 package com.sirkaue.med.voll.api.controller;
 
 import com.sirkaue.med.voll.api.domain.usuario.DadosAutenticacao;
+import com.sirkaue.med.voll.api.domain.usuario.Usuario;
+import com.sirkaue.med.voll.api.infra.security.TokenService;
+import com.sirkaue.med.voll.api.security.DadosTokenJwt;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +21,15 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(token);
-        return ResponseEntity.ok().build();
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var authentication = manager.authenticate(authenticationToken);
+        String tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new DadosTokenJwt(tokenJWT));
     }
 }
