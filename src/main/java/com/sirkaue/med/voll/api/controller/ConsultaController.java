@@ -2,7 +2,6 @@ package com.sirkaue.med.voll.api.controller;
 
 import com.sirkaue.med.voll.api.domain.consulta.AgendaDeConsultas;
 import com.sirkaue.med.voll.api.domain.consulta.DadosAgendamentoConsulta;
-import com.sirkaue.med.voll.api.domain.consulta.DadosDetalhamentoConsulta;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,8 @@ public class ConsultaController {
     @Transactional
     public ResponseEntity agendar(@RequestBody @Valid DadosAgendamentoConsulta dados) {
 
-        agenda.agendar(dados);
+        var dto = agenda.agendar(dados);
 
-        return ResponseEntity.ok(new DadosDetalhamentoConsulta(null, null, null, null));
+        return ResponseEntity.ok(dto);
     }
 }
