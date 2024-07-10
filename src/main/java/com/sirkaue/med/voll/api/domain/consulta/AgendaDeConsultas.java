@@ -1,7 +1,8 @@
 package com.sirkaue.med.voll.api.domain.consulta;
 
 import com.sirkaue.med.voll.api.domain.consulta.exceptions.ValidacaoException;
-import com.sirkaue.med.voll.api.domain.consulta.validacoes.ValidadorAgendamentoDeConsulta;
+import com.sirkaue.med.voll.api.domain.consulta.validacoes.agendamento.ValidadorAgendamentoDeConsulta;
+import com.sirkaue.med.voll.api.domain.consulta.validacoes.cancelamento.ValidadorCancelamentoDeConsulta;
 import com.sirkaue.med.voll.api.domain.medico.Medico;
 import com.sirkaue.med.voll.api.domain.medico.MedicoRepository;
 import com.sirkaue.med.voll.api.domain.paciente.PacienteRepository;
@@ -24,6 +25,9 @@ public class AgendaDeConsultas {
 
     @Autowired
     private List<ValidadorAgendamentoDeConsulta> validadores;
+
+    @Autowired
+    private List<ValidadorCancelamentoDeConsulta> validadoresCancelamento;
 
     public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
 
@@ -48,6 +52,17 @@ public class AgendaDeConsultas {
 
         consultaRepository.save(consulta);
         return new DadosDetalhamentoConsulta(consulta);
+    }
+
+    public void cancelar(DadosCancelamentoConsulta dados) {
+        if (!consultaRepository.existsById(dados.idConsulta())) {
+            throw new ValidacaoException("Id da consulta informado não existe!");
+        }
+
+        validadoresCancelamento.forEach(v -> v.validar(dados));
+
+        var consulta = consultaRepository.getReferenceById(dados.idConsulta());
+        consulta.cancelar(dados.motivo());
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {

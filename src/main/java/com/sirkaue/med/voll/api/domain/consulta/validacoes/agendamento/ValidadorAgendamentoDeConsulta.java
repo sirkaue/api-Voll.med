@@ -1,4 +1,4 @@
-package com.sirkaue.med.voll.api.domain.consulta.validacoes;
+package com.sirkaue.med.voll.api.domain.consulta.validacoes.agendamento;
 
 import com.sirkaue.med.voll.api.domain.consulta.DadosAgendamentoConsulta;
 
