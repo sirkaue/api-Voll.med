@@ -2,6 +2,7 @@ package com.sirkaue.med.voll.api.controller;
 
 import com.sirkaue.med.voll.api.domain.consulta.AgendaDeConsultas;
 import com.sirkaue.med.voll.api.domain.consulta.DadosAgendamentoConsulta;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/consultas")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
     @Autowired
